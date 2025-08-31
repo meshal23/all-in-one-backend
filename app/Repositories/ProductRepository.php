@@ -21,6 +21,6 @@ class ProductRepository implements ProductInterface
      */
     public function getProducts()
     {
-        dd("Fetching Products");
+        dd("Fetching Productsss");
     }
 }
