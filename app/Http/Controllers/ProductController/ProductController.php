@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $this->productInterface->getProducts();
+        return $this->productInterface->getProducts();
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->productInterface->storeProducts($request);
     }
 
     /**

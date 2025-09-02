@@ -3,6 +3,10 @@
 namespace App\Repositories;
 
 use App\Interfaces\ProductInterface;
+use App\Models\ProductModel\Product;
+use Illuminate\Foundation\Exceptions\Renderer\Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductRepository implements ProductInterface
 {
@@ -21,6 +25,19 @@ class ProductRepository implements ProductInterface
      */
     public function getProducts()
     {
-        dd("Fetching Productsss");
+        try {
+            $products = Product::all();
+
+            return response()->json([
+                'products' => 'fetch all products'
+            ]);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function storeProducts(Request $request)
+    {
+        dd($request->all());
     }
 }
