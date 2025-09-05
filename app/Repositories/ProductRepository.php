@@ -36,8 +36,8 @@ class ProductRepository implements ProductInterface
         }
     }
 
-    public function storeProducts(Request $request)
+    public function storeProducts($productRequest)
     {
-        dd($request->all());
+        return Product::create($productRequest);
     }
 }

@@ -4,15 +4,16 @@ namespace App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\ProductInterface;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public $productInterface;
+    public $productService;
 
-    public function __construct(ProductInterface $productInterface)
+    public function __construct(ProductService $productService)
     {
-        $this->productInterface = $productInterface;
+        $this->productService = $productService;
     }
 
     /**
@@ -20,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return $this->productInterface->getProducts();
+        return $this->productService->getProducts();
     }
 
     /**
@@ -36,7 +37,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->productInterface->storeProducts($request);
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required'
+        ]);
+        $this->productService->storeProducts($request);
     }
 
     /**
