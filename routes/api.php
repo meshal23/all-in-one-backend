@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemMasterController\ItemMasterController;
 use App\Http\Controllers\ProductController\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,4 +15,5 @@ Route::get('user', function (Request $request) {
 // Route::resource('products', ProductController::class);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('products', ProductController::class);
+    Route::resource('item-master', ItemMasterController::class);
 });
