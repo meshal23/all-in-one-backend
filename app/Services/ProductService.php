@@ -27,7 +27,7 @@ class ProductService
     }
 
     /**
-     * Function: store products
+     * Function: store products 
      * Description: store a product into the database
      */
     public function storeProducts(ProductRequest $request)

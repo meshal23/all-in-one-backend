@@ -7,11 +7,12 @@ use App\Models\ProductModel\Product;
 use Illuminate\Foundation\Exceptions\Renderer\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements ProductInterface
 {
     /**
-     * Create a new class instance.
+     * Create a new class instance. 
      */
     public function __construct()
     {
@@ -38,6 +39,13 @@ class ProductRepository implements ProductInterface
 
     public function storeProducts($productRequest)
     {
-        return Product::create($productRequest);
+        // return Product::create($productRequest);
+        try {
+            DB::transaction();
+            Product::create($productRequest);
+        } catch (Exception $e) {
+            throw $e;
+            DB::rollBack();
+        }
     }
 }
