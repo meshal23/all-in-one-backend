@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ItemBrandInterface;
+use App\Interfaces\ItemCategoryInterface;
 use App\Interfaces\ItemMasterInterface;
 use App\Interfaces\ProductInterface;
+use App\Repositories\ItemBrandRepository;
+use App\Repositories\ItemCategoryRepository;
 use App\Repositories\ItemMasterRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(ItemMasterInterface::class, ItemMasterRepository::class);
+        $this->app->bind(ItemBrandInterface::class, ItemBrandRepository::class);
+        $this->app->bind(ItemCategoryInterface::class, ItemCategoryRepository::class);
     }
 
     /**
