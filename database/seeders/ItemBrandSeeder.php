@@ -13,6 +13,6 @@ class ItemBrandSeeder extends Seeder
      */
     public function run(): void
     {
-        ItemBrand::insert([]);
+        ItemBrand::insert(["code" => 1021011, "name" => "uniliver"]);
     }
 }

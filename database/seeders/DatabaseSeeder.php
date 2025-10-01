@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\ItemBrand\ItemBrand;
-use App\Models\ItemCategory\ItemCategory;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(ItemBrand::class);
-        $this->call(ItemCategory::class);
+        $this->call(ItemBrandSeeder::class);
+        $this->call(ItemCategorySeeder::class);
         // User::factory(10)->create();
 
         // User::factory()->create([
