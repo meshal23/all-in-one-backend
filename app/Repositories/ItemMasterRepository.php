@@ -18,13 +18,27 @@ class ItemMasterRepository implements ItemMasterInterface
         //
     }
 
-    public function getItems()
+    public function getItems($search)
     {
         try {
-            $items = ItemMaster::all();
-            return response()->json([
-                'items' => $items
-            ], 200);
+            if (($search != null || $search != "") && strlen($search) == 3) {
+                $searchItems = ItemMaster::query()
+                    ->when($search, function ($query, $search) {
+                        if (strlen($search) >= 3) {
+                            $query->where('name', 'like', "%$search%");
+                        }
+                    })
+                    ->get();
+
+                return response()->json([
+                    "items" => $searchItems
+                ], 200);
+            } else {
+                $items = ItemMaster::cursorPaginate(2);
+                return response()->json([
+                    'items' => $items
+                ], 200);
+            }
         } catch (Exception $e) {
             throw $e;
         }
@@ -32,12 +46,36 @@ class ItemMasterRepository implements ItemMasterInterface
 
     public function storeItem($itemMasterRequest)
     {
+        DB::beginTransaction();
         try {
-            DB::transaction();
-            ItemMaster::create($itemMasterRequest);
+            $item = ItemMaster::create($itemMasterRequest);
+            DB::commit();
+            return response()->json([
+                "message" => "item created",
+                "item" => $item
+            ], 200);
         } catch (Exception $e) {
             throw $e;
             DB::rollBack();
+        }
+    }
+
+    public function searchItem($search)
+    {
+        try {
+            $searchItems = ItemMaster::query()
+                ->when($search, function ($query, $search) {
+                    if (strlen($search) >= 3) {
+                        $query->where('name', 'like', '%' . $search . '%');
+                    }
+                })
+                ->get();
+
+            return response()->json([
+                "items" => $searchItems
+            ], 200);
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 }

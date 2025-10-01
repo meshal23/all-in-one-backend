@@ -19,15 +19,15 @@ class ItemMasterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->itemMasterService->getItems();
+        return $this->itemMasterService->getItems($request);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() 
     {
         //
     }
@@ -35,7 +35,7 @@ class ItemMasterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ItemMasterRequest $request)
     {
         return $this->itemMasterService->storeItem($request);
     }
@@ -70,5 +70,10 @@ class ItemMasterController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function searchItem(Request $request)
+    {
+        return $this->itemMasterService->searchItem($request);
     }
 }
