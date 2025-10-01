@@ -23,8 +23,8 @@ class ItemMasterRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'cost_price' => 'required',
-            'retail_price' => 'required'
+            'costPrice' => 'required',
+            'retailPrice' => 'required'
         ];
     }
 
@@ -37,7 +37,7 @@ class ItemMasterRequest extends FormRequest
         return [
             'name.required' => 'Item name is required',
             'cost_price.required' => 'Cost price is required',
-            'retail_price' => 'Retail price is required'
+            'retail_price.required' => 'Retail price is required'
         ];
     }
 }
