@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('item_masters', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('code');
+            $table->bigInteger('code')->unique();
             $table->bigInteger('brand_code');
             $table->bigInteger('category_code');
             $table->string('name');

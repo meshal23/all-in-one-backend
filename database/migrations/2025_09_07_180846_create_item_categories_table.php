@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('item_categories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('code')->unique();
+            $table->string('name');
             $table->timestamps();
         });
     }
